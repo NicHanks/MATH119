@@ -1,0 +1,141 @@
+---
+title: "Proj3Task1"
+output: html_document
+date: "2024-03-16"
+---
+
+Two plots with the f3 function:
+first plot shows it being a softer curve
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# run this line once in the console to get the data4soils package
+#devtools::install_github("byuidatascience/data4soils")
+
+library(data4soils)
+
+Ng <- cfbp_fpjuliet$ng
+hist(Ng)
+mean(Ng)
+var(Ng)
+```
+
+
+
+# Two plots illustrating the parameters of f3
+
+```{r}
+l <- 1
+l.2 <- 7
+x <- seq(0,25,.01)
+
+f3.1 <- function(x,l) {
+  l * exp(-l * x)
+}
+
+y.1 <- f3.1(x,l)
+
+y.2 <- f3.1(x,l.2)
+  
+plot(x, y.1, type="l", ylim=c(0,4))
+```
+
+
+When lambda is increased it goes higher.
+this is the second plot:
+
+
+``` {r}
+
+
+plot(x, y.2, type="l", ylim=c(0,4))
+
+
+
+```
+
+
+
+
+## Visually fitted f2 Density histogram
+this is a plot with a histogram and a curve 
+
+``` {r}
+x <- 7
+l <- 9
+
+gamma <- integrate(function(t) t^(x-1) * exp(-t), lower=0, upper=Inf)
+
+
+f2 <- function(x, alpha, beta) {
+  beta / alpha * gamma(alpha) * x^(alpha - 1) * exp(-beta * x)
+}
+
+hist(Ng, freq=FALSE)  # this set histogram to the probability
+.33
+#line(f2(gamma,x,l))  # It's saying that one of the parameters isn't a number(gamma?)
+```
+
+## Visually fitted f3 Density histogram 
+this is the second  plot with a histogram and a curve :)
+
+``` {r}
+lambda <- .9
+x <- seq(0,25,.1)
+#might need to fix this later! 
+f3 <- function(lambda, m) {
+  return(lambda * exp(-lambda * m))
+}
+
+hist(Ng, freq=FALSE)
+lines(x,f3(lambda,x))  # saying something about ... 
+```
+
+
+
+
+
+#I used rgamma() to simulate a sample of 25,000 measurements and used these to approximate the requested probability.
+
+
+```{r}
+set.seed(619)
+beta <- 7.3
+alpha <- .95
+tmp2 <- rgamma(25000, shape = alpha, rate = beta)   # I think I need to look up and find in desmos
+length(which(tmp2 > 10))
+
+#Use the simulated sample to calculate the approximate probability that the amount of explosive in this sample will be more than 10 mg/kg?
+
+#this simulates the sample
+#RGAMMA() 
+
+```
+
+
+
+
+#I used rexp() to simulate a sample of 25,000 measurements and used these to approximate the requested probability.
+
+REXP()
+length(which(tmp3 > 10) / 25000
+``` {R}
+set.seed(619)
+lambda <- .9
+tmp3 <- rexp(25000, rate = lambda)
+length(which(tmp3 > 10)) / 25000
+
+
+# USE REXP() TO SIMULATE
+
+
+```
+
+
+
+#I verifiied my probability computations were correct using the Shiny App.
+&
+#I organized my work into a cohesive analysis.
+
+

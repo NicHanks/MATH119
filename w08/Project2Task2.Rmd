@@ -1,0 +1,155 @@
+---
+title: "Project2Task2"
+output: html_document
+date: "2024-02-26"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+############### this is code from 2/26 monday wiki
+#clear the environment
+rm(list=ls())
+#load the library
+library(data4led)
+#read in the data set
+bulb <- led_bulb(1,seed=123) #Remember to use your assigned seed!
+
+# Here is our Data.
+t <- bulb$hours
+y <- bulb$percent_intensity
+
+#define the loglikelihood function
+l <- function(p,t,y){
+  44*log(1/sqrt(2*pi)) - (1/2)*sum((y-100-p*t)^2)
+}
+
+#create a list of inputs for our plot of the loglikelihood function
+a1 <- seq(-0.005,0.005,1e-5)
+#use those inputs to calculate outputs for our plot of the loglikelihood function
+Y <- as.vector(lapply(a1,FUN=l,t=t,y=y))
+
+#plot the loglikelihood function
+plot(a1,Y,type='l')
+######################
+```
+
+## Function 1
+
+Consider the model f_2(t; a_1,a_2) = 100 + a_1t + a_2t^2 where t≥0
+. The function f_2
+ models the brightness of a lightbulb, measured as a percent of the original intensity of the lightbulb, given the number of hours the lightbulb as been on, t
+ .
+
+In order to fit f_2
+ to a list of 44 measurements, (ti,yi)
+ we need to find the first and second partial derivatives of the loglikelihood function for the residuals. Assuming the residuals (or errors) are independent and normally distributed (with mean 0 and standard deviation 1), the loglikelihood function for these errors is 
+*******************
+.
+
+Calculating ∂ℓ6∂a1
+We compute ∂ℓ6∂a1
+ by treating a2
+ as a constant and differentiate with respect to a1
+ using the derivative rules.
+
+\begin{align*}
+\frac{\partial \ell_6}{\partial a_1}
+&= \frac{\partial}{\partial a_1}\left(44\ln\left(\frac{1}{\sqrt{2\pi}}\right)\right) + \sum_{i=1}^{44} \frac{\partial}{\partial a_1}\left(\left(- \frac{1}{2}\right)(y_i - 100 - a_1t_i - a_2(1-e^{-0.0003t_i}))^2\right) &\text{(sum/difference rule)}\\
+
+&= 0 + \sum_{i=1}^{44} \left(- \frac{1}{2}\right)\frac{\partial}{\partial a_1}\left((y_i - 100 - a_1t_i - a_2(1-e^{-0.0003t_i}))^2\right) &\text{(constant and constant multiple rules)}\\
+
+&= \sum_{i=1}^{44} \left(- \frac{1}{2}\right)\left(2(y_i - 100 - a_1t_i - a_2(1-e^{-0.0003t_i}))(-t_i)\right) &\text{(chain rule)}\\
+
+&= \sum_{i=1}^{44} t_i(y_i - 100 - a_1t_i - a_2(1-e^{-0.0003t_i})) &\text{(simplify; multiply $-\frac{1}{2}$, 2, and $-t_i$)}\\
+\end{align*}
+
+We can simplify ∂ℓ6∂a1
+ using the properties of sums.
+
+∂ℓ6∂a1=∑i=144ti(yi−100−a1ti−a2(1−e−0.0003ti))=∑i=144ti(yi−100)−a1t2i−a2ti(1−e−0.0003ti)=∑i=144ti(yi−100)+∑i=144−a1t2i+∑i=144−a2ti(1−e−0.0003ti)=∑i=144ti(yi−100)−a1∑i=144t2i−a2∑i=144ti(1−e−0.0003ti)(distribution inside the sum)(break the sum into three sums)(pull constant multiples out of the sums)
+
+We see ∂ℓ6∂a1
+ is of the form a constant, subtract a constant multiple of a1
+, subtract a constant multiple of a2
+.
+∂ℓ6∂a1=(∑i=144ti(yi−100))−a1(∑i=144t2i)−a2(∑i=144ti(1−e−0.0003ti))
+
+These constants depend on our data and can be computed in R. Let A=∑44i=1ti(yi−100)≈83738.9
+, B=∑44i=1t2i≈328767530
+, and C=∑44i=1ti(1−e−0.0003ti)≈59520.5
+.
+
+## [1] 83738.93
+## [1] 328767530
+## [1] 59520.54
+Calculating ∂ℓ6∂a2
+We compute ∂ℓ6∂a2
+ by treating a1
+ as a constant and differentiate with respect to a2
+ using the derivative rules.
+
+∂ℓ6∂a2=∂∂a2(44ln(12π−−√))+∑i=144∂∂a2((−12)(yi−100−a1ti−a2(1−e−0.0003ti))2)=0+∑i=144(−12)∂∂a2((yi−100−a1ti−a2(1−e−0.0003ti))2)=∑i=144(−12)(2(yi−100−a1ti−a2(1−e−0.0003ti))(−(1−e−0.0003ti)))=∑i=144(1−e−0.0003ti)(yi−100−a1ti−a2(1−e−0.0003ti))(sum/difference rule)(constant and constant multiple rules)(chain rule)(simplify; multiply −12, 2, and −(1−e−0.0003ti))
+
+We can simplify ∂ℓ6∂a2
+ using the properties of sums.
+
+∂ℓ6∂a2=∑i=144(1−e−0.0003ti)(yi−100−a1ti−a2(1−e−0.0003ti))=∑i=144(1−e−0.0003ti)(yi−100)−a1ti(1−e−0.0003ti)−a2(1−e−0.0003ti)2=∑i=144(1−e−0.0003ti)(yi−100)+∑i=144−a1ti(1−e−0.0003ti)+∑i=144−a2(1−e−0.0003ti)2=∑i=144(1−e−0.0003ti)(yi−100)−a1∑i=144ti(1−e−0.0003ti)−a2∑i=144(1−e−0.0003ti)2(distribution inside the sum)(break the sum into three sums)(pull constant multiples out of the sums)
+
+We see ∂ℓ6∂a2
+ is of the form a constant, subtract a constant multiple of a1
+, subtract a constant multiple of a2
+.
+∂ℓ6∂a2=(∑i=144(1−e−0.0003ti)(yi−100))−a1(∑i=144ti(1−e−0.0003ti))−a2(∑i=144(1−e−0.0003ti)2)
+
+These constants depend on our data and can be computed in R. Let D=∑44i=1(1−e−0.0003ti)(yi−100)≈−15.691
+, C=∑44i=1ti(1−e−0.0003ti)≈59520.5
+, and E=∑44i=1(1−e−0.0003ti)2≈10.998
+. Notice that C
+ is a constant in ∂ℓ6∂a2
+ and ∂ℓ6∂a1
+.
+
+## [1] -15.6911
+## [1] 59520.54
+## [1] 10.99773
+We will use the first partials of ℓ6
+ to calculate the second partials of ℓ6
+. We only need to compute ∂2ℓ6∂a21
+, ∂2ℓ6∂a22
+ and ∂2ℓ6∂a1a2
+ since the mix partials are equal for ℓ6
+.
+
+Calculating ∂2ℓ6∂a21
+We compute ∂2ℓ6∂a21
+ by taking the derivative of ∂ℓ6∂a1
+ with respect to a1
+.
+∂2ℓ6∂a21=∂∂a1((∑i=144ti(yi−100))−a1(∑i=144t2i)−a2(∑i=144ti(1−e−0.0003ti)))=0−(∑i=144t2i)−0
+We see ∂2ℓ6∂a21=−∑44i=1t2i≈−99542
+.
+
+## [1] -328767530
+Calculating ∂2ℓ6∂a22
+We compute ∂2ℓ6∂a22
+ by taking the derivative of ∂ℓ6∂a2
+ with respect to a2
+.
+∂2ℓ6∂a22=∂∂a2((∑i=144(1−e−0.0003ti)(yi−100))−a1(∑i=144ti(1−e−0.0003ti))−a2(∑i=144(1−e−0.0003ti)2))=0−0−∑i=144(1−e−0.0003ti)2
+We see ∂2ℓ6∂a22=−∑44i=1(1−e−0.0003ti)2≈−10.998
+.
+
+## [1] -10.99773
+Calculating ∂2ℓ6∂a1a2
+We compute ∂2ℓ6∂a1a2
+ by taking the derivative of ∂ℓ6∂a2
+ with respect to a1
+.
+∂2ℓ6∂a1a2=∂∂a1((∑i=144(1−e−0.0003ti)(yi−100))−a1(∑i=144ti(1−e−0.0003ti))−a2(∑i=144(1−e−0.0003ti)2))=0−∑i=144ti(1−e−0.0003ti)−0
+We see ∂2ℓ6∂a22=−∑44i=1ti(1−e−0.0003ti)≈−59520.5
+.
+
+## [1] -59520.54
+

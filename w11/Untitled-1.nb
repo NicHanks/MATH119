@@ -1,0 +1,206 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6705,        196]
+NotebookOptionsPosition[      6114,        178]
+NotebookOutlinePosition[      6529,        194]
+CellTagsIndexPosition[      6486,        191]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     RowBox[{"f", "=", 
+      RowBox[{"5", " ", 
+       RowBox[{"Exp", "[", 
+        RowBox[{
+         RowBox[{"-", "5"}], " ", "x"}], "]"}]}]}], "\n", 
+     RowBox[{"A", "=", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{"f", ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "0", ",", "Infinity"}], "}"}]}], "]"}]}], "\n", 
+     RowBox[{"EV", "=", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{"x", "*", "f"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "0", ",", "Infinity"}], "}"}]}], "]"}]}], "\n", 
+     RowBox[{"Var", "=", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"x", "-", "EV"}], ")"}], "^", "2"}], "*", "f"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "0", ",", "Infinity"}], "}"}]}], "]"}]}], 
+     "\[IndentingNewLine]"}]},
+   {"\[Placeholder]"}
+  }]], "Input",
+ CellChangeTimes->{{3.9200367501546535`*^9, 3.920036753660124*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"b441899e-b952-414d-b797-eb831a2a64ae"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    FractionBox[
+     SuperscriptBox["\[ExponentialE]", 
+      RowBox[{
+       RowBox[{"-", "5"}], " ", "x"}]], "25"], "}"}], ",", 
+   RowBox[{"{", "\[Placeholder]", "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.920036760238777*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"01d9804e-5cdf-bc4f-b6cf-f1f2db8de134"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"1", " ", "/", " ", "Sqrt"}], 
+   RowBox[{"(", 
+    RowBox[{"2", " ", "*", " ", "pie", " ", "*", " ", "sigma"}], ")"}], " ", 
+   "*", " ", "exp", 
+   RowBox[{
+    RowBox[{"(", ")"}], "^", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "1"}], "/", "2"}], ")"}]}], 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"x", "-", 
+      RowBox[{"n", "/", "sigma"}]}], ")"}], "^", "2"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$Assumptions", " ", "=", " ", 
+   RowBox[{"\[Sigma]", " ", ">", " ", "0"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", " ", "/", " ", 
+      RowBox[{"Sqrt", "[", 
+       RowBox[{"2", "*", "\[Pi]", " ", "*", " ", 
+        RowBox[{"\[Sigma]", "^", "2"}]}], "]"}]}], ")"}], "*", 
+    RowBox[{"Exp", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "1"}], "/", "2"}], "*", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"x", "-", "\[Mu]"}], ")"}], "/", " ", "\[Sigma]"}], ")"}], 
+       "^", "2"}]}], "]"}]}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Integrate", "[", 
+   RowBox[{"f", ",", 
+    RowBox[{"(", 
+     RowBox[{"x", ",", 
+      RowBox[{"-", "Infinity"}], ",", "Infinity"}], ")"}]}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"x", "*", "f"}], ",", 
+    RowBox[{"(", 
+     RowBox[{"x", ",", 
+      RowBox[{"-", "Infinity"}], ",", "Infinity"}], ")"}]}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"now", " ", "we", " ", "need", " ", "to", " ", "find", " ", 
+  "variance", " ", "and", " ", "mean", " ", "for", " ", 
+  RowBox[{"f2", "!"}], " ", 
+  TemplateBox[<|"query" -> "", "boxes" -> InterpretationBox["", 
+      Failure[
+      "NoParse", <|
+       "MessageTemplate" -> "No Wolfram Language translation found.", 
+        "MessageParameters" -> <||>, "Query" -> ""|>]], 
+    "allassumptions" -> {}, "assumptions" -> {}, "open" -> {1}, 
+    "querystate" -> {}, "contextinfo" -> Automatic, "version" -> 5|>,
+   "LinguisticAssistantTemplate"]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "now", " ", "we", " ", "need", " ", "to", " ", "find", " ", "variance", " ",
+    "and", " ", "mean", " ", "for", " ", "f2"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$Assumptions", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"\[Mu]", " ", ">", " ", "0"}], " ", "&&", " ", 
+    RowBox[{"\[Beta]", " ", ">", " ", "0"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"f", " ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"\[Beta]", "^", "\[Alpha]"}], " ", "/", " ", 
+    RowBox[{"Gamma", "[", "\[Alpha]", "]"}]}], " ", "*", " ", 
+   RowBox[{"x", "^", 
+    RowBox[{"(", 
+     RowBox[{"a", "-", "1"}], ")"}]}], " ", "*", " ", 
+   RowBox[{"Exp", "[", 
+    RowBox[{
+     RowBox[{"-", "\[Beta]"}], " ", "*", " ", "x"}], 
+    "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"Integrate", "[", 
+  RowBox[{"f", ",", 
+   RowBox[{"(", 
+    RowBox[{"x", ",", "0", ",", " ", "Infinity"}], ")"}]}], 
+  "]"}], "\[IndentingNewLine]", "1", "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"x", "*", "f"}], ",", 
+    RowBox[{"(", 
+     RowBox[{"x", ",", "0", ",", "Infinity"}], ")"}]}], "]"}], 
+  "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.920122496000641*^9, 3.9201226588955555`*^9}, {
+   3.920122778939604*^9, 3.9201229052401714`*^9}, 3.9201229471073437`*^9, {
+   3.920123002743986*^9, 3.9201230031603107`*^9}, {3.9201232058013*^9, 
+   3.9201232538195515`*^9}, {3.9201239776042747`*^9, 3.920123995047138*^9}, {
+   3.9201240844723816`*^9, 3.920124175492216*^9}, {3.920124256876066*^9, 
+   3.920124369910721*^9}, {3.9201244434730816`*^9, 3.920124494298832*^9}},
+ EmphasizeSyntaxErrors->True,
+ CellLabel->"In[2]:=",ExpressionUUID->"a98b2e6e-d113-864f-ac46-3fbbbd9e00d1"]
+},
+WindowSize->{573.75, 421.5},
+WindowMargins->{{188.25, Automatic}, {-4.125, Automatic}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"be6b3301-5692-9f4f-8f8a-494cbfd69ea1"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1100, 32, 123, "Input",ExpressionUUID->"b441899e-b952-414d-b797-eb831a2a64ae"],
+Cell[1683, 56, 369, 10, 50, "Output",ExpressionUUID->"01d9804e-5cdf-bc4f-b6cf-f1f2db8de134"]
+}, Open  ]],
+Cell[2067, 69, 4043, 107, 400, "Input",ExpressionUUID->"a98b2e6e-d113-864f-ac46-3fbbbd9e00d1"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
